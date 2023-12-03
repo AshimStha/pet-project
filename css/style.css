@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Nova+Square&family=Roboto:wght@100;300;400;500&family=Smooch+Sans:wght@200;400;500&display=swap");
+
+/* font-family: 'Bebas Neue', sans-serif;
+font-family: 'Dela Gothic One', sans-serif;
+font-family: 'Nova Square', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Smooch Sans', sans-serif; */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+body {
+  height: 95vh;
+  background-color: black;
+  align-content: center;
+}
+
+body .wrapper_landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+}
+
+#landing_heading {
+  color: white;
+  font-size: 40px;
+  animation: heading-color 6s infinite;
+}
+
+#landing_text {
+  color: white;
+  font-size: 24px;
+  font-weight: 300;
+  padding-top: 20px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  word-break: break-all;
+  word-wrap: break-word;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#landing_arrow {
+  color: white;
+  font-size: 40px;
+  margin-top: 50px;
+  text-decoration: none;
+  border-radius: 40%;
+  padding: 10px 10px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  animation: content-float 3s infinite;
+}
+
+#landing_arrow:hover {
+  animation: arrow-bg 3s infinite;
+}
+
+footer {
+  text-align: center;
+}
+
+footer p {
+  color: white;
+  font-size: 14px;
+  font-family: "Dela Gothic One", sans-serif;
+  word-spacing: 2px;
+}
+
+/*Keyframe animation for the heading text*/
+@keyframes heading-color {
+  20% {
+    color: red;
+  }
+
+  40% {
+    color: rgb(26, 250, 250);
+  }
+
+  60% {
+    color: yellow;
+  }
+
+  80% {
+    color: rgb(35, 255, 35);
+  }
+
+  100% {
+    color: rgb(83, 163, 255) (4, 0, 255);
+  }
+}
+
+/*Keyframe animation for the arrow*/
+@keyframes content-float {
+  0% {
+    margin-bottom: 0px;
+  }
+
+  50% {
+    margin-bottom: 15px;
+  }
+
+  100% {
+    margin-bottom: 0px;
+  }
+}
+
+/*Keyframe animation for the arrow bg color*/
+@keyframes arrow-bg {
+  20% {
+    background-color: red;
+  }
+
+  40% {
+    background-color: rgb(70, 186, 186);
+  }
+
+  60% {
+    background-color: rgb(197, 197, 85);
+  }
+
+  80% {
+    background-color: rgb(81, 177, 81);
+  }
+
+  100% {
+    background-color: rgb(83, 163, 255) (4, 0, 255);
+  }
+}
