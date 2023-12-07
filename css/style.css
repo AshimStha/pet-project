@@ -166,8 +166,8 @@ select {
 .names_input_feature {
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: self-start;
+  align-items: flex-start;
+  align-content: center;
 }
 
 /*The player names adding button*/
