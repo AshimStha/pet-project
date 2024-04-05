@@ -3,13 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Team</title>
+    <title>Team Creation</title>
 
     <!--Linking the CSS file-->
     <link rel="stylesheet" href="css/style.css" />
-
-    <!--Linking the JS file-->
-    <script src="js/app.js"></script>
 
     <!--Linking the font awesome kit-->
     <script
@@ -21,7 +18,7 @@
     <main id="contents">
       <!--The header section-->
       <header id="form_header">
-        <a id="home_icon" href="/index.html"
+        <a id="home_icon" href="index.html"
           ><i class="fa-solid fa-house" style="color: #ffffff"></i
         ></a>
       </header>
@@ -30,18 +27,19 @@
       <div class="wrapper">
         <!--The form section-->
         <div class="form_section">
-          <form id="team_form" name="team_form">
+          <form id="team_form" name="team_form" action="result.html">
             <!--The number field-->
-            <label class="team_form_label" for="team_number"
+            <label class="team_form_label" for="total_team_members"
               >Enter the total number of players:</label
             >
             <input
               type="number"
-              id="team_number"
+              id="total_team_members"
               class="team_form_input"
-              name="team_number"
-              placeholder="Minimum 4 players required"
+              name="total_team_members"
+              placeholder="Min: 4 and Max: 8"
             />
+            <span class="form_error_msg" id="team_number_error_message"></span>
 
             <!--The names field-->
             <label class="team_form_label" for="team_players"
@@ -55,21 +53,25 @@
                 name="team_players"
                 placeholder="Must match the total"
               />
-              <button id="name_submit_btn">
+              <a id="name_submit_btn">
                 <i class="fa-solid fa-plus" style="color: #000000"></i>
-              </button>
+              </a>
             </div>
+            <span class="form_error_msg" id="name_error_message"></span>
 
-            <!--The number of teams field-->
+            <!--The number of players in a team field-->
             <label class="team_form_label" for="number_of_teams"
-              >Make teams of:</label
+              >Total teams:</label
             >
 
-            <select name="number_of_teams" id="team_number">
-              <option value="2">2 players</option>
-              <option value="3">3 players</option>
-              <option value="4">4 players</option>
+            <!--The select element for number of teams-->
+            <select name="number_of_teams" id="number_of_teams">
+              <option value="x">Select your answer</option>
+              <option value="2">2</option>
+              <option value="4">4</option>
             </select>
+            <span class="form_error_msg" id="teams_error_message"></span>
+
             <!--Submit button-->
             <button type="submit" id="form_total_submit_btn">Confirm</button>
           </form>
@@ -86,5 +88,8 @@
         </div>
       </div>
     </main>
+
+    <!--Linking the JS file-->
+    <script src="js/app.js"></script>
   </body>
 </html>

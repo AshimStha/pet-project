@@ -1,63 +1,107 @@
 // When the page loads
 window.onload = function () {
-  // Creating a form handler
+  // fetch the data from the local storage
   var formHandle = document.forms.team_form;
 
-  // Fetching the form elements
+  // Clearing the local storage
+  localStorage.removeItem("listOfPlayers");
+  localStorage.removeItem("totalTeams");
 
-  // For the number of players
-  var playerNumber = formHandle.team_number;
-  // For player names input
-  var playerNames = formHandle.team_players;
-
-  // Players list
+  // Fetching the error message elements
+  var teamNumberErrorMessage = document.getElementById(
+    "team_number_error_message"
+  );
+  var nameErrorMessage = document.getElementById("name_error_message");
+  var teamsErrorMessage = document.getElementById("teams_error_message");
+  var submitPlayerName = document.getElementById("name_submit_btn");
   var playersList = document.getElementById("players_list");
+  var listOfPlayers = [];
 
-  // The add player button
-  var addPlayerBtn = document.getElementById("name_submit_btn");
-
-  // When the add player button is clicked, call AddPlayers()
-  addPlayerBtn.onclick = AddPlayers;
-
-  // When the form is submitted, call processForm()
+  // Execute the function when the form is submitted
   formHandle.onsubmit = processForm;
 
-  // Defining processForm()
+  // Validation for the number of teams
+  submitPlayerName.addEventListener("click", function () {
+    if (formHandle.team_players.value === "") {
+      nameErrorMessage.style.display = "block";
+      nameErrorMessage.innerHTML = "Please enter a name";
+      return false;
+    }
+
+    // Check if the number of players is greater than the number of teams
+    if (listOfPlayers.length >= formHandle.total_team_members.value) {
+      nameErrorMessage.style.display = "block";
+      nameErrorMessage.innerHTML =
+        "You have reached the maximum number of players";
+      return false;
+    }
+
+    // add the player name to the array
+    listOfPlayers.push(formHandle.team_players.value);
+    // create a local storage item
+    localStorage.setItem("listOfPlayers", listOfPlayers);
+    // execute the function to create the list of players
+    createPlayerList(formHandle.team_players.value);
+  });
+
+  // function to process the form
   function processForm() {
-    // Preventing the form from being submitted
+    // validation for the fields
+    if (formHandle.total_team_members.value <= 0) {
+      teamNumberErrorMessage.style.display = "block";
+      teamNumberErrorMessage.innerHTML = "Please enter a number greater than 0";
+      return false;
+    }
+
+    if (formHandle.total_team_members.value < 4) {
+      teamNumberErrorMessage.style.display = "block";
+      teamNumberErrorMessage.innerHTML = "Please enter a number greater than 3";
+      return false;
+    }
+
+    if (formHandle.total_team_members.value % 2 !== 0) {
+      teamNumberErrorMessage.style.display = "block";
+      teamNumberErrorMessage.innerHTML = "Please enter an even number";
+      return false;
+    }
+
+    if (formHandle.team_players.value === "") {
+      nameErrorMessage.style.display = "block";
+      nameErrorMessage.innerHTML = "Please enter a name";
+      return false;
+    }
+
+    if (formHandle.number_of_teams.value === "x") {
+      teamsErrorMessage.style.display = "block";
+      teamsErrorMessage.innerHTML = "Please select a number of teams";
+      return false;
+    }
+
+    localStorage.setItem("totalTeams", formHandle.number_of_teams.value);
+    window.location.href = "result.html";
+
     return false;
   }
 
-  // Function to add players
-  function AddPlayers() {
-    if (playerNames.value == "" || playerNames.value == null) {
-      alert("Please enter a valid player name!");
-    } else if (
-      playerNumber.value == "" ||
-      playerNumber.value == null ||
-      playerNumber.value == 0
-    ) {
-      alert("Please enter a valid number of players!");
-    } else if (playerNumber.value < 4) {
-      alert("There should be at least 4 players!");
-    } else if (playerNumber.value > 8) {
-      alert("The total players can not be more than 8!");
-    } else if (playersList.children.length >= playerNumber.value) {
-      alert("You have reached the maximum number of players!");
-    } else {
-      // Create a new list item
-      var li = document.createElement("li");
+  // function to create the list of players
+  function createPlayerList(value) {
+    console.log(value);
+    // Creating a new list item
+    var li = document.createElement("li");
 
-      // Add the player name to the list item
-      li.innerHTML = playerNames.value;
+    // Adding the player name to the list item
+    li.innerHTML = value;
 
-      // Add the list item to the players list
-      playersList.appendChild(li);
+    // Adding the list item to the players list
+    playersList.appendChild(li);
 
-      li.classList.add("players_list_item");
+    // Adding the class to the list item element for CSS
+    li.classList.add("players_list_item");
 
-      // Clear the player name input
-      playerNames.value = "";
-    }
+    // Creating a new span element with the close button
+    var span = document.createElement("span");
+    span.innerHTML = "\u00D7";
+    li.appendChild(span);
+    span.classList.add("remove");
   }
 };
